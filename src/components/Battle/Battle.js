@@ -1,6 +1,7 @@
 import styles from './styles.module.css';
-import { opponentStats } from './shared/characters'
+import { opponentStats } from './characters.js';
 import { PlayerSummary } from '../PlayerSummary/PlayerSummary';
+import { useState } from 'react';
 
 export const Battle = () => {
 
@@ -11,7 +12,7 @@ export const Battle = () => {
         <div className={styles.opponent}>
             <div className={styles.summary}>
                 <PlayerSummary 
-                    health={opponentHealth}
+                    health={opponentStats}
                 />
             </div>
         </div>
