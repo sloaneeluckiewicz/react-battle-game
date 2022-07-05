@@ -1,25 +1,43 @@
 import styles from './styles.module.css';
-import { opponentStats } from './characters.js';
+import { opponentStats, playerStats } from './characters.js';
 import { PlayerSummary } from '../PlayerSummary/PlayerSummary';
+import { BattleMenu } from '../BattleMenu/BattleMenu';
 import { useState } from 'react';
 
 export const Battle = () => {
-
-    const [] = useState(opponentStats.maxHealth);
+    const [playerHealth, setPlayerHealth] = useState(playerStats.maxHealth);
+    const [opponentHealth, setOpponentHealth] = useState(opponentStats.maxHealth);
 
     return (
     <div className={styles.main}>
         <div className={styles.opponent}>
             <div className={styles.summary}>
                 <PlayerSummary 
-                    health={opponentStats}
+                    health={opponentHealth}
+                    name={opponentStats.name}
+                    level={opponentStats.level}
+                    maxHealth={opponentStats.maxHealth}
                 />
             </div>
         </div>
         <div className={styles.user}>
             <div className={styles.summary}>
-                <PlayerSummary main />
+                <PlayerSummary 
+                    main
+                    health={playerHealth}
+                    name={playerStats.name}
+                    level={playerStats.level}
+                    maxHealth={playerStats.maxHealth} 
+                />
             </div>
+        </div>
+
+        <div className={styles.hudChild}>
+            <BattleMenu 
+                onAttack={() => console.log('Attack!')}
+                onMagic={() => console.log('Magic!')}
+                onHeal={() => console.log('Heal!')}
+            />
         </div>
     </div>
     );
