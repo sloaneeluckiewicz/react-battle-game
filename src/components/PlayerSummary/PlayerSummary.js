@@ -5,12 +5,12 @@ const red= '#821200';
 const blue= '#1953cb'
 
 
-export const PlayerSummary = ({ main=false, name, level, health, maxHealth }) => {
+export const PlayerSummary = ({ main, name, level, health, maxHealth }) => {
     // if main prop is true we return red, if false return blue
     return (
     <div 
-        style={{ backgroundColor: main ? red: blue}} 
         className={styles.main}
+        style={{ backgroundColor: main ? red: blue}} 
         >
         <div className={styles.info}>
             <div className={styles.name}>{name}</div>
