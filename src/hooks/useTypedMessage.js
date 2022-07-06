@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { wait } from '../shared/helpers';
 
-export const useTypedMessage = (message) => {
+export const useTypedMessage = message => {
     const[typedMessage, setTypedMessage] = useState('');
 
     // incrementally build a string with 25 ms between each letter in the word
     useEffect(() => {
-        setTypedMessage(' ');
+        setTypedMessage('');
 
         if (message.length) {
             (async () => {
