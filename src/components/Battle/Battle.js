@@ -1,10 +1,10 @@
 import styles from './styles.module.css';
 import { useEffect, useState } from 'react';
 import { useAIOpponent, useBattleSequence } from '../../hooks';
-import { opponentStats, playerStats } from '../../shared';
+import { opponentStats, playerStats, wait } from '../../shared';
 import { BattleMenu, PlayerSummary, BattleAnnouncer } from '../../components';
 
-export const Battle = () => {
+export const Battle = ({ onGameEnd }) => {
     const[sequence, setSequence] = useState({});
     
     const{
@@ -24,6 +24,16 @@ export const Battle = () => {
             setSequence({ turn, mode: aiChoice });
         }
     }, [turn, aiChoice, inSequence]);
+
+    useEffect(() => {
+        if (playerHealth === 0 || opponentHealth === 0) {
+            (async () => {
+                await wait(1000);
+                onGameEnd(playerHealth === 0 ? opponentStats : playerStats);
+            })();
+        }
+
+    }, [playerHealth, opponentHealth, onGameEnd]);
 
     return (
     <>
